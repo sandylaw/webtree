@@ -7,7 +7,7 @@
 branch_vline="│   "  #Branch vertical line
 #branch_null="    " #null separation branch
 middle_branch_end="├── "
-last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       #the last file branch
+last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   #the last file branch
 branch_sum=""
 filecount=0
 directorycount=0
@@ -43,12 +43,15 @@ if [ "$1" == "-d" ]; then
 else
     URL=$1
 fi
+if [ "${URL: -1}" == "/" ]; then
+    :
+else
+    URL=$URL"/"
+fi
 
 isurl=$(check_url "$URL")
-if [ "$isurl" == 0 ] && [ "${URL: -1}" == "/" ]; then
+if [ "$isurl" == 0 ]; then
     :
-elif     [ "$isurl" == 0 ] && [ "${URL: -1}" != "/" ]; then
-    URL=$URL"/"
 else
     echo "Please check the URL: $URL"
     exit 1
@@ -58,7 +61,7 @@ function webtree() {
     URL=$1
     num=0
     i=0
-    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P '(?<=href=).*(?=</a>)'|grep -o -P '(?<=">).*(?=$)'| grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
+    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P '(?<=href=).*(?=</a>)' | grep -o -P '(?<=">).*(?=$)' | grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
     for d in ${WEBDIR[*]}; do
         if [ "${d: -2}" == "./" ]; then
             unset "WEBDIR[$i]"
