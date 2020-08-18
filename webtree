@@ -7,7 +7,7 @@
 branch_vline="│   "  #Branch vertical line
 #branch_null="    " #null separation branch
 middle_branch_end="├── "
-last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   #the last file branch
+last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         #the last file branch
 branch_sum=""
 filecount=0
 directorycount=0
@@ -62,6 +62,23 @@ function webtree() {
     num=0
     i=0
     read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P '(?<=href=).*(?=</a>)' | grep -o -P '(?<=">).*(?=$)' | grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
+
+    while echo "${WEBDIR[*]}" | grep "href=" &> /dev/null; do
+        read -ra WEBDIR <<< "$(echo "${WEBDIR[*]}" | tr " " "\\n" | grep -o -P '(?<=href=).*(?=$)' | sort | uniq | tr "\\n" " ")"
+    done
+
+    #if ! echo ${WEBDIR[*]}| grep "href=" &> /dev/null;then
+    #	:
+    #else
+    #	read -ra WEBDIR <<< "$(echo ${WEBDIR[*]}|tr " " "\\n"| grep -o -P '(?<=href=).*(?=$)'| sort | uniq | tr "\\n" " ")"
+    #fi
+
+    if ! echo "${WEBDIR[*]}" | grep ">" &> /dev/null; then
+        :
+    else
+        read -ra WEBDIR <<< "$(echo "${WEBDIR[*]}" | tr " " "\\n" | grep -o -P '(?<=>).*(?=$)' | sort | uniq | tr "\\n" " ")"
+    fi
+
     for d in ${WEBDIR[*]}; do
         if [ "${d: -2}" == "./" ]; then
             unset "WEBDIR[$i]"
