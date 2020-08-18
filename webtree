@@ -2,12 +2,12 @@
 #v1.0 by sandylaw <freelxs@gmail.com> 2020-08-18
 #This script will list the website.
 #reference :https://blog.csdn.net/sky619351517/article/details/77016845
-#Eg. bash webtree $URL
+#Eg. webtree $URL
 # shellcheck disable=SC1091
-branch_vline="│   "                                                                                                                      #Branch vertical line
+branch_vline="│   "        #Branch vertical line
 #branch_null="    " #null separation branch
 middle_branch_end="├── "
-last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   #the last file branch
+last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 #the last file branch
 branch_sum=""
 filecount=0
 directorycount=0
@@ -18,7 +18,7 @@ function help() {
     echo
     echo "This script will list the website, like tree for local."
     echo
-    echo "Syntax: bash webtree URL"
+    echo "Syntax:webtree URL"
     echo
 }
 function loadhelp() {
