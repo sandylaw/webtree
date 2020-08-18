@@ -61,23 +61,7 @@ function webtree() {
     URL=$1
     num=0
     i=0
-    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P '(?<=href=).*(?=</a>)' | grep -o -P '(?<=">).*(?=$)' | grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
-
-    while echo "${WEBDIR[*]}" | grep "href=" &> /dev/null; do
-        read -ra WEBDIR <<< "$(echo "${WEBDIR[*]}" | tr " " "\\n" | grep -o -P '(?<=href=).*(?=$)' | sort | uniq | tr "\\n" " ")"
-    done
-
-    #if ! echo ${WEBDIR[*]}| grep "href=" &> /dev/null;then
-    #	:
-    #else
-    #	read -ra WEBDIR <<< "$(echo ${WEBDIR[*]}|tr " " "\\n"| grep -o -P '(?<=href=).*(?=$)'| sort | uniq | tr "\\n" " ")"
-    #fi
-
-    if ! echo "${WEBDIR[*]}" | grep ">" &> /dev/null; then
-        :
-    else
-        read -ra WEBDIR <<< "$(echo "${WEBDIR[*]}" | tr " " "\\n" | grep -o -P '(?<=>).*(?=$)' | sort | uniq | tr "\\n" " ")"
-    fi
+    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P  '(href=.*?>)' | grep -o -P '(?<=href=").*(?=">)' | grep -v "^\?" | grep -v "^\\/"|grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
 
     for d in ${WEBDIR[*]}; do
         if [ "${d: -2}" == "./" ]; then
