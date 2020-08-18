@@ -67,6 +67,14 @@ function webtree() {
         if [ "${d: -2}" == "./" ]; then
             unset "WEBDIR[$i]"
         fi
+        if [ "${d:0:2}" == "./" ]; then
+            WEBDIR[$i]="${d:2}"
+            echo $i
+        fi
+        if [ "${d:0:3}" == "../" ]; then
+            WEBDIR[$i]="${d:3}"
+            echo $i
+        fi
         i=$((i + 1))
     done
     for d in ${WEBDIR[*]}; do
