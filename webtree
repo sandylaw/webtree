@@ -58,7 +58,7 @@ function webtree() {
     URL=$1
     num=0
     i=0
-    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep href= | awk -F '"' '{print $2}' | sort | uniq | tr "\\n" " ")"
+    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P '(?<=href=).*(?=</a>)' | awk -F '"' '{print $2}' | grep -v ^/|grep -v ^\?| sort | uniq | tr "\\n" " ")"
     for d in ${WEBDIR[*]}; do
         if [ "${d: -2}" == "./" ]; then
             unset "WEBDIR[$i]"
