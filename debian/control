@@ -1,0 +1,13 @@
+Source: webtree
+Section: utils
+Priority: optional
+Maintainer: deepin <packages@deepin.com>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+Homepage: <insert the upstream URL, if relevant>
+
+Package: webtree
+Architecture: all
+Depends: ${misc:Depends}, wget, bash,
+Description: webtree
+ A tool to list the website, like tree for local.

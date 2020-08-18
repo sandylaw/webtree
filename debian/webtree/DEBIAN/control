@@ -1,0 +1,11 @@
+Package: webtree
+Version: 1.0
+Architecture: all
+Maintainer: deepin <packages@deepin.com>
+Installed-Size: 16
+Depends: wget, bash
+Section: utils
+Priority: optional
+Homepage: <insert the upstream URL, if relevant>
+Description: webtree
+ A tool to list the website, like tree for local.
