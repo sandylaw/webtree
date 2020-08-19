@@ -4,10 +4,10 @@
 #reference :https://blog.csdn.net/sky619351517/article/details/77016845
 #Eg. webtree $URL
 # shellcheck disable=SC1091
-branch_vline="│   "  #Branch vertical line
+branch_vline="│   "    #Branch vertical line
 #branch_null="    " #null separation branch
 middle_branch_end="├── "
-last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         #the last file branch
+last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           #the last file branch
 branch_sum=""
 filecount=0
 directorycount=0
@@ -23,7 +23,7 @@ function help() {
     echo
 }
 function loadhelp() {
-    if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ "$1" == "-help" ] || [[ ! -n $* ]]; then
+    if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ "$1" == "-help" ] || [[ -z $* ]]; then
         help
         exit 0
     fi
@@ -61,7 +61,7 @@ function webtree() {
     URL=$1
     num=0
     i=0
-    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P  '(href=.*?>)' | grep -o -P '(?<=href=").*(?=">)' | grep -v "^\?" | grep -v "^\\/"|grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
+    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P  '(href=.*?>)' | grep -o -P '(?<=href=").*(?=">)' | grep -v "^\?" | grep -v "^\\/" | grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
 
     for d in ${WEBDIR[*]}; do
         if [ "${d: -2}" == "./" ]; then
