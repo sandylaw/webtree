@@ -16,7 +16,7 @@ function help() {
     # Display Help
     echo "Usage:"
     echo
-    echo "This script will list the website, like tree for local."
+    echo "List the contents of http/ftp directories in a tree-like format."
     echo
     echo "Syntax:webtree [-d] URL"
     echo "       		-d : only display dir."

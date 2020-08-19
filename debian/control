@@ -1,13 +1,13 @@
 Source: webtree
 Section: utils
 Priority: optional
-Maintainer: deepin <packages@deepin.com>
+Maintainer: sandylaw <freelxs@gmail.com>
 Build-Depends: debhelper (>= 11)
 Standards-Version: 4.1.3
-Homepage: <insert the upstream URL, if relevant>
+Homepage: https://www.v2less.com 
 
 Package: webtree
 Architecture: all
 Depends: ${misc:Depends}, wget, bash,
 Description: webtree
- A tool to list the website, like tree for local.
+ list contents of http/ftp directories in a tree-like format.
