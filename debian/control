@@ -11,3 +11,4 @@ Architecture: all
 Depends: ${misc:Depends}, wget, bash,
 Description: webtree
  list contents of http/ftp directories in a tree-like format.
+ Get the http/ftp every dir or file url.
