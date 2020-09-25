@@ -8,7 +8,7 @@
 branch_vline="│   " #Branch vertical line
 #branch_null="    " #null separation branch
 middle_branch_end="├── "
-last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           #the last file branch
+last_branch_end="└── "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     #the last file branch
 branch_sum=""
 filecount=0
 directorycount=0
@@ -65,10 +65,13 @@ elif [ "$1" == "geturl" ]; then
 else
     URL=$1
 fi
+url_basename=$(basename "$URL")
 if [ "${URL: -1}" == "/" ]; then
     :
-else
+elif ! echo "${url_basename}" | grep -q "\."; then
     URL=$URL"/"
+else
+    _just_file="yes"
 fi
 
 isurl=$(check_url "$URL")
@@ -85,8 +88,11 @@ function webtree() {
     geturl=$3
     num=0
     i=0
-    read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P  '(href=.*?>)' | grep -o -P '(?<=href=").*(?=">)' | grep -v "^\?" | grep -v "^\\/" | grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
-
+    if [ -z "$_just_file" ]; then
+        read -ra WEBDIR <<< "$(wget -O - "$URL" 2> /dev/null | grep -o -P '(href=.*?>)' | grep -o -P '(?<=href=").*(?=">)' | grep -v "^\?" | grep -v "^\\/" | grep -v "^Name</a>" | grep -v "^Parent Directory$" | sort | uniq | tr "\\n" " ")"
+    else
+        WEBDIR=("$URL")
+    fi
     for d in ${WEBDIR[*]}; do
         if [ "${d: -2}" == "./" ]; then
             unset "WEBDIR[$i]"
