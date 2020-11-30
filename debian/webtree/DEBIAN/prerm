@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+case "$1" in
+    remove)
+
+        # check webtree is running
+        if ps -aux | grep webtree >/dev/null; then
+            echo 'webtree is running'
+            exit 101
+        fi
+        # remove build file
+        if [ -f /usr/bin/webtree ]; then
+            sudo rm -f /usr/bin/webtree
+        fi       
+        ;;
+esac

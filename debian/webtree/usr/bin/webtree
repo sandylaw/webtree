@@ -131,8 +131,6 @@ function webtree() {
                 filecount=$((filecount + 1))
                 if [ -z "$geturl" ]; then
                     echo -e "${branch_sum}$last_branch_end\\033[1;32m$d\\033[0m"
-                elif [ -n "$_just_file" ]; then
-                    echo "$URL"
                 else
                     echo "$URL$d"
                 fi
@@ -158,8 +156,6 @@ function webtree() {
                 filecount=$((filecount + 1))
                 if [ -z "$geturl" ]; then
                     echo -e "${branch_sum}$middle_branch_end\\033[1;32m$d\\033[0m"
-                elif [ -n "$_just_file" ]; then
-                    echo "$URL"
                 else
                     echo "$URL$d"
                 fi

@@ -1,0 +1,12 @@
+Package: webtree
+Version: 1.2
+Architecture: all
+Maintainer: sandylaw <freelxs@gmail.com>
+Installed-Size: 19
+Depends: wget, bash
+Section: utils
+Priority: optional
+Homepage: https://www.v2less.com
+Description: webtree
+ list contents of http/ftp directories in a tree-like format.
+ Get the http/ftp every dir or file url.

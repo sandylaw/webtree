@@ -1,3 +1,10 @@
+webtree (1.2) UNSTABLE; urgency=medium
+
+  * Non-maintainer upload.
+  * 
+
+ -- sandylaw <freelxs@gmail.com>  Fri, 25 Sep 2020 12:37:23 +0800
+
 webtree (1.1) UNSTABLE; urgency=medium
 
   *build:add geturl 
